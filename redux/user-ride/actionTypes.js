@@ -1,0 +1,9 @@
+export const USERMAPLOCATION = 'user/user_map_location';
+export const USERMAPDESTINATION = 'user/user_map_destination';
+export const MYLOCATION = 'user/my_location';
+export const NEARESTVEHICLES = 'user/nearest_vehicles'
+export const SELECTEDRIDEVEHICLE = 'user/selected_ride_vehicle'
+export const GETFARE = 'user/get_fare'
+export const GETCOUPON = 'user/fare_coupon_data'
+export const REMOVECOUPON = 'user/remove_fare_coupon_data'
+export const CURRENTFAREDATA = 'user/current_fare_data'

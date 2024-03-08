@@ -1,0 +1,415 @@
+.dashboard {
+    @apply min-h-screen w-full relative;
+    background-color: #f7f7f7;
+    .sidebar {
+        @apply w-0 lg:w-sidebar fixed left-0 top-0 h-screen overflow-x-auto bg-[#F7F7F7] shadow-lg z-30 transition-all hidden lg:block;
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #aaa;
+        }
+
+        .site-title {
+            @apply font-semibold tracking-widest;
+        }
+        .site-title-sm {
+            @apply font-semibold tracking-widest uppercase hidden;
+        }
+
+        li {
+            @apply  transition-all font-medium;
+            .nav-item {
+                @apply p-3 pl-8 block cursor-pointer text-sm text-black transition-all relative;
+                svg {
+                    @apply transition-all absolute top-3.5;
+                    font-size: 13px;
+                }
+                span {
+                    @apply transition-none pl-7 inline-block;
+                }
+                &.has-arrow::after {
+                    transform: rotate(-135deg) translate(0, -50%);
+                }
+                &.active {
+                    @apply text-black bg-main2 rounded-r-full shadow-lg border-l-[#FBC02D] border-l-[10px];
+                }
+            }
+            .sub-menu {
+                .label {
+                    display: none;
+                }
+                .nav-item {
+                    @apply py-3 hover:bg-main2 pl-12 hover:rounded-r-full hover:border-l-[#FBC02D] hover:border-l-[10px];
+                }
+                li:last-child {
+                    @apply pb-1;
+                }
+            }
+
+            &.active {
+                @apply bg-light hover:bg-light ;
+                ul {
+
+                }
+            }
+            &.mm-active {
+                &>a {
+                    &.has-arrow::after {
+                        transform: rotate(-45deg) translate(0, -50%);
+                    }
+                }
+            }
+        }
+    }
+
+    .header {
+        @apply fixed  top-0 right-0 left-0 lg:left-sidebar z-20 h-16 transition-all;
+    }
+
+    .main-content {
+        @apply lg:pl-sidebar z-0 relative transition-all;
+        padding-top: 70px;
+    }
+
+    @media screen and (min-width: 1025px) {
+        &.mini {
+            .sidebar {
+                @apply w-sidebar-mini absolute h-full;
+                overflow: inherit;
+
+                .site-title {
+                    @apply hidden;
+                }
+                .site-title-sm {
+                    @apply block;
+                }
+
+
+                .ps {
+                    overflow: inherit!important;
+                }
+                li {
+                    @apply rounded;
+                    .nav-item {
+                        @apply px-3 m-2.5 py-2;
+                        svg {
+                            font-size: 18px;
+                            margin: 0!important;
+                            @apply relative top-0;
+                        }
+                        span {
+                            @apply transition-none;
+                            visibility: hidden;
+                        }
+
+                        .c-tooltip {
+                            @apply transition-none;
+                            visibility: hidden;
+                            width: 120px;
+                            color: #fff;
+                            text-align: center;
+                            padding: 5px 0;
+                            border-radius: 6px;
+                            position: absolute;
+                            z-index: 20;
+                            @apply left-sidebar-mini bg-[#F7F7F7];
+                        }
+                        &:after {
+                            display: none;
+                        }
+                    }
+
+                    .mm-show {
+                        display: none;
+                    }
+
+                    &:hover {
+                        .nav-item {
+                            .c-tooltip {
+                                visibility: visible;
+                            }
+                        }
+                        .sub-menu{
+                            display: block!important;
+                            height: auto!important;
+                        }
+
+                        .sub-menu.mm-show{
+                            display: block!important;
+                            height: auto!important;
+                        }
+                    }
+
+
+                    .sub-menu {
+                        @apply absolute bg-[#F7F7F7] w-48 -mt-12 z-30 p-0 m-0 rounded-sm overflow-hidden shadow-2xl;
+                        margin-left: 65px!important;
+                        .label {
+                            @apply block pt-2 pl-4 pb-2 text-sm;
+                        }
+
+                        li {
+                            margin: 0;
+                            svg {
+                                //@apply ;
+                                margin: 0 1rem!important;
+                            }
+                            span {
+                                visibility: visible;
+                                @apply pl-0;
+                            }
+                        }
+                        li:last-child {
+                            @apply pb-0;
+                        }
+                        .nav-item {
+                            @apply m-0 pb-3 pt-2.5 pl-4;
+                            &.active {
+                                svg {
+                                    @apply text-black;
+                                }
+                                @apply bg-main text-black;
+                            }
+                        }
+                    }
+
+                    &.active {
+                        @apply bg-[#F7F7F7];
+                        &>.nav-item {
+                            @apply bg-main rounded;
+                        }
+                        svg {
+                            @apply text-black;
+                        }
+                    }
+                }
+            }
+
+            .header {
+                @apply left-sidebar-mini absolute;
+            }
+            .main-content {
+                @apply pl-sidebar-mini;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1024px) {
+        &.mobile {
+            .sidebar-bg {
+                @apply z-20 absolute h-full w-full bg-[#F7F7F7] ;
+            }
+            .sidebar {
+                @apply block z-30 w-sidebar transition-all;
+            }
+        }
+    }
+}
+
+@media print {
+    .dashboard {
+        .sidebar {
+            display: none;
+        }
+        .header {
+            display: none;
+        }
+    }
+    .main-content {
+        margin: 0!important;
+        padding: 0!important;
+    }
+
+    .print-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        min-height: 100vh;
+        background-color: white;
+    }
+    .print-d-hidden {
+        display: none;
+    }
+}
+
+.recharts-responsive-container {
+    .recharts-wrapper {
+        width: 100%!important;
+        .recharts-surface, .recharts-legend-wrapper {
+            width: 100%!important;
+        }
+    }
+}
+
+html[dir="rtl"] {
+    .dashboard {
+        .sidebar {
+            @apply right-0;
+            .nav-item {
+                @apply pl-0 pr-8;
+                span {
+                    @apply pl-0 pr-7;
+                }
+            }
+
+            .sub-menu {
+                .nav-item {
+                    @apply pl-0 pr-12;
+                }
+            }
+        }
+        .header {
+            @apply lg:right-sidebar left-0;
+        }
+        .main-content {
+            @apply lg:pr-sidebar pl-0;
+        }
+        @media screen and (min-width: 1025px) {
+            &.mini {
+                .sidebar {
+                    .nav-item {
+                        svg {
+                            @apply -right-4;
+                        }
+                    }
+
+                    .c-tooltip {
+                        left: 0;
+                        top: 0;
+                        right: 65px;
+                    }
+                    .sub-menu {
+                        margin-left: 0!important;
+                        margin-right: 65px!important;
+                        .label {
+                            @apply pl-0 pr-4;
+                        }
+                        .nav-item {
+                            @apply pr-4;
+                        }
+                    }
+                }
+                .header {
+                    @apply lg:right-sidebar-mini left-0;
+                }
+                .main-content {
+                    @apply lg:pr-sidebar-mini;
+                }
+            }
+        }
+
+        label {
+            text-align: right;
+        }
+        .text-left {
+            text-align: right!important;
+        }
+    }
+
+    .ant-modal-close {
+        left: 0;
+        right: auto;
+    }
+}
+
+.language-selector {
+    & > a {
+        color: #000000;
+        &:focus {
+            color: black;
+        }
+        &:focus {
+            color: black;
+        }
+    }
+    &.dark {
+        & > a {
+            //@apply ;
+            &:focus {
+                //@apply ;
+            }
+        }
+    }
+}
+
+.card-stats-title {
+    background-color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .3px;
+}
+
+.card-stats-item-count {
+    line-height: 1;
+    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.card-stats-item-label {
+    font-size: 12px;
+    letter-spacing: .5px;
+    margin-top: 4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.card-stats-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: #34395e;
+}
+
+/*!
+* metismenujs - v1.3.1
+* A menu plugin
+* https://github.com/onokumus/metismenujs#readme
+*
+* Made by Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)
+* Under MIT License
+*/
+.metismenu .mm-collapse:not(.mm-show) {
+    display: none;
+  }
+  
+  .metismenu .mm-collapsing {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    transition-timing-function: ease;
+    transition-duration: 0.35s;
+    transition-property: height, visibility;
+  }
+  
+  .metismenu .has-arrow {
+    position: relative;
+  }
+  
+  .metismenu .has-arrow::after {
+    position: absolute;
+    content: "";
+    width: 0.5em;
+    height: 0.5em;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: initial;
+    inset-inline-end: 1em;
+    transform: rotate(45deg) translate(0, -50%);
+    transform-origin: top;
+    top: 50%;
+    transition: all 0.3s ease-out;
+  }
+  
+  *[dir=rtl] .metismenu .has-arrow::after {
+    transform: rotate(-135deg) translate(0, -50%);
+  }
+  
+  .metismenu .mm-active > .has-arrow::after,
+  .metismenu .has-arrow[aria-expanded=true]::after {
+    transform: rotate(-45deg) translate(0, -50%);
+  }
+  
+  /*# sourceMappingURL=metismenujs.css.map */
