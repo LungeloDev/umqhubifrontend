@@ -12,11 +12,11 @@ module.exports = withPWA({
     product_mode: "production",
     backend_url:
       process.env.NODE_ENV === "development"
-        ? "https://umqhubi-backend.netlify.app"
-        : "https://umqhubi-backend.netlify.app/",
+        ? "http://192.168.0.185:5900/"
+        : "https://car2gobackend.appstick.com.bd/",
     socket_io:
       process.env.NODE_ENV === "development"
-        ? "https://umqhubi-backend.netlify.app/"
-        : "https://umqhubi-backend.netlify.app/",
+        ? "http://192.168.0.185:5900"
+        : "https://car2gobackend.appstick.com.bd",
   },
 });
